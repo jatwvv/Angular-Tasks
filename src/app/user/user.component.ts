@@ -19,13 +19,21 @@ export class UserComponent {
   // ' ! ' is set to tell typescript that we know its gonna be a value.
   // {required: true} is telling angular that this is must be set.
   //input here is a generic function.
-  @Input({ required: true }) id!: string;
-  @Input({ required: true }) avatar!: string;
-  @Input({ required: true }) name!: string;
+
+  // @Input({ required: true }) id!: string;
+  // @Input({ required: true }) avatar!: string;
+  // @Input({ required: true }) name!: string;
+
+  @Input({ required: true }) user!: {
+    id: string;
+    avatar: string;
+    name: string;
+  };
+  @Input({ required: true }) selected!: boolean;
   @Output() select = new EventEmitter();
 
   get imgPath() {
-    return 'users/' + this.avatar;
+    return 'users/' + this.user.avatar;
   }
 
   //signal approach
@@ -38,6 +46,6 @@ export class UserComponent {
   // });
 
   onSelectUser() {
-    this.select.emit(this.id);
+    this.select.emit(this.user.id);
   }
 }
