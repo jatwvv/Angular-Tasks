@@ -1,4 +1,13 @@
-import { Component, Input } from '@angular/core';
+import {
+  Component,
+  Input,
+  input,
+  computed,
+  Output,
+  EventEmitter,
+  output,
+} from '@angular/core';
+// import { EventEmitter } from 'stream';
 
 @Component({
   selector: 'app-user',
@@ -7,11 +16,28 @@ import { Component, Input } from '@angular/core';
   styleUrl: './user.component.css',
 })
 export class UserComponent {
-  @Input() avatar!: string;
   // ' ! ' is set to tell typescript that we know its gonna be a value.
-  @Input() name!: string;
+  // {required: true} is telling angular that this is must be set.
+  //input here is a generic function.
+  @Input({ required: true }) id!: string;
+  @Input({ required: true }) avatar!: string;
+  @Input({ required: true }) name!: string;
+  @Output() select = new EventEmitter();
+
   get imgPath() {
     return 'users/' + this.avatar;
   }
-  onSelectUser() {}
+
+  //signal approach
+  // avatar = input.required<string>();
+  // name = input.required<string>();
+  // select = output<string>();
+
+  // imgPath = computed(() => {
+  //   return 'users/' + this.avatar();
+  // });
+
+  onSelectUser() {
+    this.select.emit(this.id);
+  }
 }
