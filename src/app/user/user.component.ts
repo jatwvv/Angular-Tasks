@@ -7,6 +7,7 @@ import {
   EventEmitter,
   output,
 } from '@angular/core';
+import { CardComponent } from "../shared/card/card.component";
 // import { EventEmitter } from 'stream';
 
 @Component({
@@ -14,6 +15,7 @@ import {
   standalone: true,
   templateUrl: './user.component.html',
   styleUrl: './user.component.css',
+  imports: [CardComponent],
 })
 export class UserComponent {
   // ' ! ' is set to tell typescript that we know its gonna be a value.
